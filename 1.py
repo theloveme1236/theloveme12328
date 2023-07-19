@@ -33,7 +33,8 @@ def like3like_login():
     
     for cookies_totel in os.listdir(os.getcwd()):
         cookies_totel_1 = cookies_totel.split('_cookies')[0]
-        if cookies_totel_1=='like':        
+        if cookies_totel_1=='like':
+            print(cookies_totel)
             driver.get("https://www.like4like.org/#social-media-platform-list")
             cookies = pickle.load(open(cookies_totel, "rb"))
             for cookie in cookies:
@@ -44,10 +45,12 @@ for cookies_totel in os.listdir(os.getcwd()):
     if cookies_totel_1=='like':        
         driver.get("https://www.like4like.org/#social-media-platform-list")
         cookies = pickle.load(open(cookies_totel, "rb"))
+        print(cookies_totel)
         for cookie in cookies:
             driver.add_cookie(cookie)
     if cookies_totel_1=='youtube':
         driver.get("https://www.youtube.com/")
+        print(cookies_totel)
         with open(cookies_totel, 'r') as file:
             cookies = file.readlines()
         cookis_like()
