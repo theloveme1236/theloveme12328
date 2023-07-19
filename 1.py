@@ -49,11 +49,12 @@ for cookies_totel in os.listdir(os.getcwd()):
         print(cookies_totel)
         driver.get("https://www.like4like.org/#social-media-platform-list")
         cookies = pickle.load(open('{}'.format(cookies_totel), "rb"))
-        try:
-            driver.add_cookie(cookie)
-        except Exception as ss:
-            print(ss)
-            continue
+        for cookie in cookies:
+            try:
+                driver.add_cookie(cookie)
+            except Exception as ss:
+                print(ss)
+                continue
     if cookies_totel_1=='youtube':
         driver.get("https://www.youtube.com/")
         print(cookies_totel)
