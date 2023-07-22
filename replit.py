@@ -1,5 +1,10 @@
 import os
-os.system('pip install selenium')
+os.system('sudo apt update -y')
+os.system('! sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb')
+os.system('! sudo apt install ./google-chrome-stable_current_amd64.deb')
+os.system('! sudo pip install selenium')
+os.system('! sudo pip install undetected_chromedriver')
+
 import subprocess
 import time
 from selenium import webdriver
@@ -7,14 +12,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import Chrome, ChromeOptions
+import undetected_chromedriver as uc
 import pickle
-#from keep_alive import keep_alive
-
-#keep_alive()
-options = webdriver.ChromeOptions()
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
-driver = webdriver.Chrome(options=options)
+options = uc.ChromeOptions()
+options.add_argument('--headless')
+driver = uc.Chrome(options=options)
 driver.implicitly_wait(10)
 driver.maximize_window()
 con = 0
