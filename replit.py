@@ -71,7 +71,7 @@ def Subscribe():
             driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
             driver.maximize_window()
             driver.implicitly_wait(15)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
+            #driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
 
             driver.find_element(By.XPATH, '/html/body/div[6]/div/div[1]/div[2]/div[2]/div[4]/div[1]/div[2]/div[1]/div/div[3]/div/div').click()
             time.sleep(5)
@@ -118,7 +118,7 @@ def like():
             driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
             driver.maximize_window()
             driver.implicitly_wait(15)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
+            #driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
 
             time.sleep(5)
             driver.find_element(By.XPATH, '/html/body/div[6]/div/div[1]/div[2]/div[2]/div[4]/div[1]/div[2]/div[1]/div/div[3]/div/div/a').click()
