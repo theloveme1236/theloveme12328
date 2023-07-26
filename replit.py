@@ -45,7 +45,7 @@ def like3like_login():
     for cookies_totel in os.listdir(os.getcwd()):    
         cookies_totel_1 = cookies_totel.split('_cookies')[0]
         if cookies_totel_1=='like':
-            email = cookies_totel.split('like_cookies')[-1].split('.pkl')[0]
+            email = cookies_totel.split('like_cookiese_')[-1].split('.pkl')[0]
             print(email)
             password = '1234thelove'
             driver.get("https://www.like4like.org/login/")
@@ -115,7 +115,7 @@ def like3like_login():
 for cookies_totel in os.listdir(os.getcwd()):
     cookies_totel_1 = cookies_totel.split('_cookies')[0]
     if cookies_totel_1=='like':
-        email = cookies_totel.split('like_cookies')[-1].split('.pkl')[0]
+        email = cookies_totel.split('like_cookiese_')[-1].split('.pkl')[0]
         print(email)
         password = '1234thelove'
         driver.get("https://www.like4like.org/login/")
