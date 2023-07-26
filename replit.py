@@ -198,7 +198,8 @@ def failed_success_minutes():
         {"email": email_to_find},
         {"$set": {"limit": failed_success}})
         print('minutes_to_add_eroooooo')
-        driver.quit()
+        Subscribe_erro_stop_time = 'stop'
+        #driver.quit()
     except Exception as ssssd2:
         
         print('failed_success_minutes:  ',ssssd2)
@@ -331,7 +332,10 @@ def like():
                 errrrroo='erro_like_{}'.format(s)
                 driver.save_screenshot('{}.png'.format(errrrroo))
                 failed_success_minutes()
-                Subscribe()
+                if Subscribe_erro_stop_time == str('stop'):
+                    print('Subscribe_erro_stop_time')
+                else:
+                    Subscribe()
             except Exception as s3:
                 print(s3)
                 continue
