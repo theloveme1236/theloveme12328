@@ -181,6 +181,7 @@ for cookies_totel in os.listdir(os.getcwd()):
         cookis_like()
 
 def failed_success_minutes():
+    global Subscribe_erro_stop_time
     try:
         erro_minutes=driver.find_element(By.ID, 'error-text').text
         You_have_failed  = erro_minutes.split(' success rate validation')[0]
@@ -328,7 +329,7 @@ def like():
                 failed_success_minutes()
                 print(Subscribe_erro_stop_time)
                 if Subscribe_erro_stop_time == 'stop':
-                    print('Subscribe_erro_stop_time')
+                    print('Subscribe__stop_time')
                 else:
                     print('runnnnn   Subscribe')
                     Subscribe()
