@@ -330,12 +330,11 @@ def like():
                 #print('false'+int(errrrroo))
                 errrrroo='erro_like_{}'.format(s)
                 driver.save_screenshot('{}.png'.format(errrrroo))
-                failed_success_minutes()
-                print(Subscribe_erro_stop_time)
                 if Subscribe_erro_stop_time == 'stop':
                     print('Subscribe__stop_time')
                 else:
                     print('runnnnn   Subscribe')
+                    failed_success_minutes()
                     Subscribe()
             except Exception as s3:
                 print(s3)
