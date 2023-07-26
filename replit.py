@@ -227,10 +227,14 @@ def Subscribe():
             time.sleep(2)
             driver.find_element(By.ID, 'subscribe-button').click()            
             #driver.save_screenshot('{}.png'.format(s))
+            time.sleep(2)
+
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
+            time.sleep(2)
+
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
-            time.sleep(5)
+            time.sleep(3)
             email_to_find = email
 
             # البحث عن المستخدم باستخدام البريد الإلكتروني
