@@ -185,7 +185,8 @@ def failed_success_minutes():
         minutes_to_add =  erro_minutes.split('next ')[-1].split(' minutes.')[0]
         print(minutes_to_add)
         current_time = datetime.utcnow()
-        time_delta = timedelta(minutes=minutes_to_add)
+        time_delta = timedelta(minutes=int(minutes_to_add))
+
         new_time = current_time + time_delta
         new_date = new_time.date()
         formatted_time = new_time.strftime('%H:%M')
@@ -195,7 +196,7 @@ def failed_success_minutes():
         user_data = collection.find_one({"email": email_to_find})
         collection.update_one(
         {"email": email_to_find},
-        {"$set": {"limit": str(failed_success)}})
+        {"$set": {"limit": failed_success}})
         print('minutes_to_add_eroooooo')
         driver.quit()
     except Exception as ssssd2:
