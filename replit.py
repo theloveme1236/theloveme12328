@@ -202,7 +202,7 @@ def failed_success_minutes():
             {"$set": {"limit": failed_success}})
             print('minutes_to_add_eroooooo')
             Subscribe_erro_stop_time = str('stop')
-        if erro_minutes ='No tasks are currently available, please try again later...':
+        if erro_minutes == 'No tasks are currently available, please try again later...':
             print('No tasks are currently available')
         #driver.quit()
     except Exception as ssssd2:
