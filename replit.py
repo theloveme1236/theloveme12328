@@ -99,7 +99,7 @@ def like3like_login():
                         {"email": email_to_find},
                         {"$set": {"login_like": new_login_like}}
                     )
-                print('first_logon_cookies_true')
+                    print('first_logon_cookies_true')
                 else:
                     print('first_logon_cookies_flase')
                     email_to_find = email
@@ -201,7 +201,6 @@ def failed_success_minutes():
     except Exception as ssssd2:
         
         print('failed_success_minutes:  ',ssssd2)
-        continue
         
 def Subscribe():
 
