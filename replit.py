@@ -183,23 +183,27 @@ for cookies_totel in os.listdir(os.getcwd()):
 def failed_success_minutes():
     try:
         erro_minutes=driver.find_element(By.ID, 'error-text').text
-        minutes_to_add =  erro_minutes.split('next ')[-1].split(' minutes.')[0]
-        print(minutes_to_add)
-        current_time = datetime.utcnow()
-        time_delta = timedelta(minutes=int(minutes_to_add))
-
-        new_time = current_time + time_delta
-        new_date = new_time.date()
-        formatted_time = new_time.strftime('%H:%M')
-        failed_success= "date:" + str(new_date) + "time:"+ str(formatted_time)
-        print(failed_success)
-        email_to_find = email
-        user_data = collection.find_one({"email": email_to_find})
-        collection.update_one(
-        {"email": email_to_find},
-        {"$set": {"limit": failed_success}})
-        print('minutes_to_add_eroooooo')
-        Subscribe_erro_stop_time = 'stop'
+        You_have_failed  = erro_minutes.split(' success rate validation')[0]
+        if You_have_failed == str('You have failed our'):
+            print('You have failed our')
+            minutes_to_add =  erro_minutes.split('next ')[-1].split(' minutes.')[0]
+            print(minutes_to_add)
+            current_time = datetime.utcnow()
+            time_delta = timedelta(minutes=int(minutes_to_add))
+            new_time = current_time + time_delta
+            new_date = new_time.date()
+            formatted_time = new_time.strftime('%H:%M')
+            failed_success= "date:" + str(new_date) + "time:"+ str(formatted_time)
+            print(failed_success)
+            email_to_find = email
+            user_data = collection.find_one({"email": email_to_find})
+            collection.update_one(
+            {"email": email_to_find},
+            {"$set": {"limit": failed_success}})
+            print('minutes_to_add_eroooooo')
+            Subscribe_erro_stop_time = str('stop')
+        if erro_minutes ='No tasks are currently available, please try again later...':
+            print('No tasks are currently available')
         #driver.quit()
     except Exception as ssssd2:
         
@@ -338,6 +342,7 @@ def like():
                 if Subscribe_erro_stop_time == str('stop'):
                     print('Subscribe_erro_stop_time')
                 else:
+                    print('runnnnn   Subscribe')
                     Subscribe()
             except Exception as s3:
                 print(s3)
