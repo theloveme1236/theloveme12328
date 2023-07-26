@@ -31,6 +31,7 @@ driver.implicitly_wait(10)
 driver.maximize_window()
 con = 0
 errrrroo = 0
+Subscribe_erro_stop_time= str('start')
 def cookis_like():
     for cookie in cookies:
         
@@ -221,13 +222,14 @@ def Subscribe():
             driver.find_element(By.ID, 'subscribe-button').click()
             
             time.sleep(3)
+            
             #driver.save_screenshot('{}.png'.format(s))
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
             time.sleep(5)
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
             time.sleep(5)
-            #print('succeed_Subscribe')
+            print('succeed_Subscribe')
             email_to_find = email
 
             # البحث عن المستخدم باستخدام البريد الإلكتروني
@@ -296,10 +298,11 @@ def like():
             time.sleep(5)
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
             time.sleep(5)
+            print('like')
             email_to_find = email
             # البحث عن المستخدم باستخدام البريد الإلكتروني
             user_data = collection.find_one({"email": email_to_find})
-
+            
             if user_data:
                 print(user_data)
                 # القيمة الحالية لـ sub وتحويلها إلى رقم صحيح
