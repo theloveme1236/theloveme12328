@@ -64,6 +64,7 @@ def like3like_login():
             current_url = driver.current_url
             if current_url=='https://www.like4like.org/user/':
                 print(current_url)
+                print('login_usearname_passowrd')
                 driver.get("https://www.like4like.org/#social-media-platform-list")
                 time.sleep(5)
                 cookies_add = "like_cookies_{}.pkl".format(email)
@@ -75,9 +76,10 @@ def like3like_login():
                     {"email": email_to_find},
                     {"$set": {"login_like": new_login_like}}
                 )
+                print('login_usearname_passowrd_true')
                 
             else:
-                print('else')
+                print('first_logon_cookies')
                 driver.get("https://www.like4like.org/#social-media-platform-list")
                 cookies = pickle.load(open('{}'.format(cookies_totel), "rb"))
                 for cookie in cookies:
@@ -97,7 +99,9 @@ def like3like_login():
                         {"email": email_to_find},
                         {"$set": {"login_like": new_login_like}}
                     )
+                print('first_logon_cookies_true')
                 else:
+                    print('first_logon_cookies_flase')
                     email_to_find = email
                     user_data = collection.find_one({"email": email_to_find})
                     new_login_like = 'false'
@@ -191,12 +195,13 @@ def failed_success_minutes():
         user_data = collection.find_one({"email": email_to_find})
         collection.update_one(
         {"email": email_to_find},
-        {"$set": {"limit": failed_uccess}})
+        {"$set": {"limit": str(failed_success)}})
         print('minutes_to_add_eroooooo')
         driver.quit()
     except Exception as ssssd2:
         
-        print('failed_success_minutes',ssssd2)
+        print('failed_success_minutes:  ',ssssd2)
+        continue
         
 def Subscribe():
 
