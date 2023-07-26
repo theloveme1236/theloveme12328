@@ -223,17 +223,12 @@ def Subscribe():
             #driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
 
             driver.find_element(By.XPATH, '/html/body/div[6]/div/div[1]/div[2]/div[2]/div[4]/div[1]/div[2]/div[1]/div/div[3]/div/div').click()
-            time.sleep(5)
             driver.switch_to.window(driver.window_handles[1])
             time.sleep(2)
-            driver.find_element(By.ID, 'subscribe-button').click()
-            
-            time.sleep(3)
-            
+            driver.find_element(By.ID, 'subscribe-button').click()            
             #driver.save_screenshot('{}.png'.format(s))
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
-            time.sleep(5)
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
             time.sleep(5)
             print('succeed_Subscribe')
