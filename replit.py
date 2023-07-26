@@ -31,7 +31,7 @@ driver.implicitly_wait(10)
 driver.maximize_window()
 con = 0
 errrrroo = 0
-Subscribe_erro_stop_time= str('start')
+Subscribe_erro_stop_time= 'start'
 def cookis_like():
     for cookie in cookies:
         
@@ -196,15 +196,14 @@ def failed_success_minutes():
             failed_success= "date:" + str(new_date) + "time:"+ str(formatted_time)
             print(failed_success)
             email_to_find = email
-            print('____________')
-            print(email_to_find)
-            print('____________')
+ 
             user_data = collection.find_one({"email": email_to_find})
             collection.update_one(
             {"email": email_to_find},
             {"$set": {"limit": failed_success}})
+            Subscribe_erro_stop_time = 'stop'
             print('minutes_to_add_eroooooo')
-            Subscribe_erro_stop_time = str('stop')
+
         if erro_minutes == 'No tasks are currently available, please try again later...':
             print('No tasks are currently available')
         #driver.quit()
@@ -231,21 +230,15 @@ def Subscribe():
             driver.switch_to.window(driver.window_handles[0])
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
             time.sleep(5)
-            print('succeed_Subscribe')
             email_to_find = email
 
             # البحث عن المستخدم باستخدام البريد الإلكتروني
             user_data = collection.find_one({"email": email_to_find})
 
             if user_data:
-                print(user_data)
-                # القيمة الحالية لـ sub وتحويلها إلى رقم صحيح
                 current_sub_value = int(user_data.get("sub", 0))
-
-                # تعديل القيمة وإضافة +1
                 new_sub_value = current_sub_value + 1
                 print('sub', int(new_sub_value))
-                # تحديث الوثيقة بالقيمة الجديدة لـ sub
                 collection.update_one(
                     {"email": email_to_find},
                     {"$set": {"sub": new_sub_value}}
@@ -300,14 +293,10 @@ def like():
             time.sleep(5)
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
             time.sleep(5)
-            print('like')
             email_to_find = email
-            # البحث عن المستخدم باستخدام البريد الإلكتروني
             user_data = collection.find_one({"email": email_to_find})
             
             if user_data:
-                print(user_data)
-                # القيمة الحالية لـ sub وتحويلها إلى رقم صحيح
                 current_sub_value = int(user_data.get("like", 0))
 
                 # تعديل القيمة وإضافة +1
@@ -337,7 +326,8 @@ def like():
                 errrrroo='erro_like_{}'.format(s)
                 driver.save_screenshot('{}.png'.format(errrrroo))
                 failed_success_minutes()
-                if Subscribe_erro_stop_time == str('stop'):
+                print(Subscribe_erro_stop_time)
+                if Subscribe_erro_stop_time == 'stop':
                     print('Subscribe_erro_stop_time')
                 else:
                     print('runnnnn   Subscribe')
