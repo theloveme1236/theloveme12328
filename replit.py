@@ -38,6 +38,7 @@ errrrroo = 0
 Subscribe_erro_stop_time= 'start'
 like_erro_stop_time = 'start'
 def cookis_like():
+    global driver
     for cookie in cookies:
         
         fields = cookie.strip().split('\t')
@@ -48,6 +49,7 @@ def cookis_like():
 
 def like3like_login():
     global email
+    global driver
     
     for cookies_totel in os.listdir(os.getcwd()):    
         cookies_totel_1 = cookies_totel.split('_cookies')[0]
@@ -207,6 +209,7 @@ for cookies_totel in os.listdir(os.getcwd()):
             )
         cookis_like()
 def limeit_all_ike4like():
+    global driver
     if Subscribe_erro_stop_time == 'stop' and like_erro_stop_time == 'stop':
         
         email_to_find = email
@@ -220,6 +223,7 @@ def limeit_all_ike4like():
 def failed_success_minutes():
     global Subscribe_erro_stop_time
     global like_erro_stop_time
+    global driver
     try:
         erro_minutes=driver.find_element(By.ID, 'error-text').text
         You_have_failed  = erro_minutes.split(' success rate validation')[0]
@@ -262,6 +266,7 @@ def failed_success_minutes():
         
         print('failed_success_minutes:  ',ssssd2)
 def Subscribe_erroo():
+    global driver
     failed_success_minutes()
     limeit_all_ike4like()
     driver.switch_to.window(driver.window_handles[0])
@@ -283,6 +288,7 @@ def Subscribe_erroo():
         print('con_sub')
         like()
 def Subscribe():
+    global driver
     
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
     con_sub = 0
@@ -334,7 +340,7 @@ def Subscribe():
         except NoSuchElementException:
             print('NoSuchElementException_sub')
             driver.save_screenshot('NoSuchElement_sub_{}.png'.format(s))
-            Subscribe_erroo(driver)
+            Subscribe_erroo()
 
                 
         except Exception as s2:
@@ -343,6 +349,7 @@ def Subscribe():
             Subscribe_erroo(driver)
 
 def like_erro():
+    global driver
     limeit_all_ike4like()
     failed_success_minutes()
     try:
@@ -370,6 +377,7 @@ def like_erro():
         print(s3)
     
 def like():
+    global driver
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
     con_like = 0
     for s in range(40004000):
@@ -422,7 +430,7 @@ def like():
         except Exception as s:
             print('Subscribe_erroo:   ',s)
             driver.save_screenshot('erro_like_{}.png'.format(s))
-            like_erro(driver)
+            like_erro()
 
 
 Subscribe()
