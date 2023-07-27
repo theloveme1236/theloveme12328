@@ -34,6 +34,7 @@ driver.maximize_window()
 con = 0
 errrrroo = 0
 Subscribe_erro_stop_time= 'start'
+like_erro_stop_time = 'start'
 def cookis_like():
     for cookie in cookies:
         
@@ -198,6 +199,7 @@ for cookies_totel in os.listdir(os.getcwd()):
 
 def failed_success_minutes():
     global Subscribe_erro_stop_time
+    global like_erro_stop_time
     try:
         erro_minutes=driver.find_element(By.ID, 'error-text').text
         You_have_failed  = erro_minutes.split(' success rate validation')[0]
@@ -213,14 +215,22 @@ def failed_success_minutes():
             failed_success= "date:" + str(new_date) + "time:"+ str(formatted_time)
             print(failed_success)
             email_to_find = email
- 
             user_data = collection.find_one({"email": email_to_find})
             collection.update_one(
             {"email": email_to_find},
-            {"$set": {"limit": failed_success}})
-            Subscribe_erro_stop_time = 'stop'
-            print('minutes_to_add_eroooooo')
-
+            {"$set": {"limit": failed_success}})            
+            current_url = driver.current_url
+            if current_url=='https://www.like4like.org/earn-credits.php?feature=youtubes':
+                print('Subscribe_erro_stop_time')
+                Subscribe_erro_stop_time = 'stop'
+            if current_url=='https://www.like4like.org/earn-credits.php?feature=youtube':
+                print('like_erro_stop_time')
+                like_erro_stop_time = 'stop'
+                email_to_find = email
+                user_data = collection.find_one({"email": email_to_find})
+                collection.update_one(
+                {"email": email_to_find},
+                {"$set": {"erro": like_erro_stop_time}}) 
         if erro_minutes == 'No tasks are currently available, please try again later...':
             print('No tasks are currently available')
         #driver.quit()
@@ -231,7 +241,7 @@ def failed_success_minutes():
 def Subscribe():
     
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
-    connnnn= 0 
+    con_sub = 0
     for s in range(40004000):
         try:
              
@@ -272,43 +282,61 @@ def Subscribe():
                 pass
         except NoSuchElementException:
             print('NoSuchElementException_sub')
-            time.sleep(20)
+            driver.save_screenshot('NoSuchElement_sub_{}'.format(s))
+            failed_success_minutes()
+            driver.switch_to.window(driver.window_handles[0])
             driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
-            connnnn +=1
-            if connnnn ==int('5'):
-                print('connnnn_sub')
+            time.sleep(20)
+            current_url = driver.current_url
+            if current_url=='https://www.like4like.org/login/':
+                print('https://www.like4like.org/login/')
+                like3like_login()
+
+            all_windows = driver.window_handles
+            if len(all_windows) > 1:
+                for window in all_windows[1:]:
+                    driver.switch_to.window(window)
+                    driver.close()
+            if Subscribe_erro_stop_time == 'stop':
                 like()
                 
-            
+
+            con_sub +=1
+            if con_sub == 5:
+                print('con_sub')
+                like()
+                
         except Exception as s2:
             #print(s2)
             try:
+                failed_success_minutes()
+                driver.save_screenshot('erro_sub_{}'.format(s))
+                driver.switch_to.window(driver.window_handles[0])
+                driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")  
                 current_url = driver.current_url
                 if current_url=='https://www.like4like.org/login/':
                     print('https://www.like4like.org/login/')
                     like3like_login()
-                
                 all_windows = driver.window_handles
                 if len(all_windows) > 1:
                     for window in all_windows[1:]:
                         driver.switch_to.window(window)
                         driver.close()
 
-                driver.switch_to.window(driver.window_handles[0])
-                #errrrroo += 1
-                errrrroo='erro_sub_{}'.format(s)
-                driver.save_screenshot('{}.png'.format(errrrroo))
-                failed_success_minutes()
-                #print('false'+int(errrrroo))
                 
-                like()
+                if Subscribe_erro_stop_time == 'stop':
+                    like()
+                con_sub +=1
+                if con_sub == 5:
+                    print('con_sub_2')
+                    like()
             except Exception as s4:
                 print(s4)
                 continue
 
 def like():
-    connnnn_2 = 0
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
+    con_like = 0
     for s in range(40004000):
         try:
             
@@ -344,12 +372,32 @@ def like():
                     )
         except NoSuchElementException:
             print('NoSuchElementException_like')
-            time.sleep(20)
+            driver.save_screenshot('NoSuchElement_like_{}'.format(s))
+            if Subscribe_erro_stop_time == 'stop':
+                print('Subscribe__stop_time_NoSuchElementException')
+            else:
+                failed_success_minutes()
+                con_like+=1
+                if con_like == 5:
+                    print('con_like')
+                    Subscribe()
+            driver.switch_to.window(driver.window_handles[0])
             driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
-            connnnn_2 +=1
-            if connnnn_2 ==int('5'):
-                print('connnnn_like')
-                Subscribe()
+            time.sleep(20)
+            current_url = driver.current_url
+            if current_url=='https://www.like4like.org/login/':
+                print('https://www.like4like.org/login/')
+                like3like_login()
+
+            all_windows = driver.window_handles
+            if len(all_windows) > 1:
+                for window in all_windows[1:]:
+                    driver.switch_to.window(window)
+                    driver.close()
+
+
+                
+
 
         except Exception as s:
             print(s)
@@ -369,11 +417,13 @@ def like():
                 errrrroo='erro_like_{}'.format(s)
                 driver.save_screenshot('{}.png'.format(errrrroo))
                 if Subscribe_erro_stop_time == 'stop':
-                    print('Subscribe__stop_time')
+                    print('Subscribe__stop_time_NoSuchElementException')
                 else:
-                    print('runnnnn   Subscribe')
                     failed_success_minutes()
-                    Subscribe()
+                    con_like+=1
+                    if con_like == 5:
+                        print('con_like')
+                        Subscribe()
             except Exception as s3:
                 print(s3)
                 continue
