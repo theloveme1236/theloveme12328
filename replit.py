@@ -19,6 +19,8 @@ import requests
 import pickle
 from datetime import datetime, timedelta
 import base64
+from selenium.common.exceptions import NoSuchElementException
+
 cluster = MongoClient('mongodb+srv://theloveme1238:zx5LtPcgLpcpIh7D@cluster0.pzuhxov.mongodb.net/?retryWrites=true&w=majority')
 db = cluster["my_database"]
 collection = db["users"]        
@@ -95,7 +97,7 @@ def like3like_login():
                 if current_url=='https://www.like4like.org/user/':
                     email_to_find = email
                     user_data = collection.find_one({"email": email_to_find})
-                    new_login_like = 'true'
+                    new_login_like = 'login_cookies'
                     collection.update_one(
                         {"email": email_to_find},
                         {"$set": {"login_like": new_login_like}}
@@ -155,17 +157,19 @@ for cookies_totel in os.listdir(os.getcwd()):
             time.sleep(15)
             current_url = driver.current_url
             if current_url=='https://www.like4like.org/user/':
+                print('login_cookies')
                 email_to_find = email
                 user_data = collection.find_one({"email": email_to_find})
-                new_login_like = 'true'
+                new_login_like = 'login_cookies'
                 collection.update_one(
                     {"email": email_to_find},
                     {"$set": {"login_like": new_login_like}}
                 )
             else:
+                print('false_cookies')
                 email_to_find = email
                 user_data = collection.find_one({"email": email_to_find})
-                new_login_like = 'false'
+                new_login_like = 'false_cookies'
 
                 collection.update_one(
                     {"email": email_to_find},
@@ -178,6 +182,14 @@ for cookies_totel in os.listdir(os.getcwd()):
         print(cookies_totel)
         with open(cookies_totel, 'r') as file:
             cookies = file.readlines()
+        email_to_find = email
+        user_data = collection.find_one({"email": email_to_find})
+        new_login_youtube = 'youtube_cookies'
+
+        collection.update_one(
+            {"email": email_to_find},
+            {"$set": {"login_like": new_login_youtube}}
+            )
         cookis_like()
 
 def failed_success_minutes():
@@ -252,6 +264,9 @@ def Subscribe():
             else:
                 
                 pass
+        except NoSuchElementException:
+            print('NoSuchElementException_sub')
+            time.sleep(20)
         except Exception as s2:
             #print(s2)
             try:
@@ -312,6 +327,9 @@ def like():
                     {"email": email_to_find},
                     {"$set": {"like": new_sub_value}}
                     )
+        except NoSuchElementException:
+            print('NoSuchElementException_like')
+            time.sleep(20)
 
         except Exception as s:
             print(s)
