@@ -334,13 +334,13 @@ def Subscribe():
         except NoSuchElementException:
             print('NoSuchElementException_sub')
             driver.save_screenshot('NoSuchElement_sub_{}.png'.format(s))
-            Subscribe_erroo()
+            Subscribe_erroo(driver)
 
                 
         except Exception as s2:
             print('Subscribe_erroo:   ',s2)
             driver.save_screenshot('erro_sub_{}.png'.format(s))
-            Subscribe_erroo()
+            Subscribe_erroo(driver)
 
 def like_erro():
     limeit_all_ike4like()
@@ -422,7 +422,7 @@ def like():
         except Exception as s:
             print('Subscribe_erroo:   ',s)
             driver.save_screenshot('erro_like_{}.png'.format(s))
-            like_erro()
+            like_erro(driver)
 
 
 Subscribe()
