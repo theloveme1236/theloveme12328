@@ -288,7 +288,7 @@ def Subscribe():
     
         except NoSuchElementException:
             print('NoSuchElementException_sub')
-            driver.save_screenshot('NoSuchElement_sub_{}'.format(s))
+            driver.save_screenshot('NoSuchElement_sub_{}.png'.format(s))
             failed_success_minutes()
             driver.switch_to.window(driver.window_handles[0])
             driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
@@ -381,7 +381,7 @@ def like():
             break
         except NoSuchElementException:
             print('NoSuchElementException_like')
-            driver.save_screenshot('NoSuchElement_like_{}'.format(s))
+            driver.save_screenshot('NoSuchElement_like_{}.png'.format(s))
             if Subscribe_erro_stop_time == 'stop':
                 print('Subscribe__stop_time_NoSuchElementException')
             else:
