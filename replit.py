@@ -21,7 +21,7 @@ from datetime import datetime, timedelta
 import base64
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoSuchWindowException
-
+import sys
 
 cluster = MongoClient('mongodb+srv://theloveme1238:zx5LtPcgLpcpIh7D@cluster0.pzuhxov.mongodb.net/?retryWrites=true&w=majority')
 db = cluster["my_database"]
