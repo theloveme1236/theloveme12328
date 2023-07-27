@@ -346,7 +346,7 @@ def Subscribe():
         except Exception as s2:
             print('Subscribe_erroo:   ',s2)
             driver.save_screenshot('erro_sub_{}.png'.format(s))
-            Subscribe_erroo(driver)
+            Subscribe_erroo()
 
 def like_erro():
     global driver
