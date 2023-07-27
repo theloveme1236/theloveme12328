@@ -20,6 +20,8 @@ import pickle
 from datetime import datetime, timedelta
 import base64
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchWindowException
+
 
 cluster = MongoClient('mongodb+srv://theloveme1238:zx5LtPcgLpcpIh7D@cluster0.pzuhxov.mongodb.net/?retryWrites=true&w=majority')
 db = cluster["my_database"]
@@ -280,6 +282,10 @@ def Subscribe():
             else:
                 
                 pass
+        except NoSuchWindowException:
+            print('NoSuchWindowException_stop')
+            break
+    
         except NoSuchElementException:
             print('NoSuchElementException_sub')
             driver.save_screenshot('NoSuchElement_sub_{}'.format(s))
@@ -370,6 +376,9 @@ def like():
                     {"email": email_to_find},
                     {"$set": {"like": new_sub_value}}
                     )
+        except NoSuchWindowException:
+            print('NoSuchWindowException_stop')
+            break
         except NoSuchElementException:
             print('NoSuchElementException_like')
             driver.save_screenshot('NoSuchElement_like_{}'.format(s))
