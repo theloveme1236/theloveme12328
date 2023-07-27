@@ -261,7 +261,27 @@ def failed_success_minutes():
     except Exception as ssssd2:
         
         print('failed_success_minutes:  ',ssssd2)
-        
+def Subscribe_erroo():
+    failed_success_minutes()
+    limeit_all_ike4like()
+    driver.switch_to.window(driver.window_handles[0])
+    driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
+    current_url = driver.current_url
+    if current_url=='https://www.like4like.org/login/':
+        print('https://www.like4like.org/login/')
+        like3like_login()
+
+    all_windows = driver.window_handles
+    if len(all_windows) > 1:
+        for window in all_windows[1:]:
+            driver.switch_to.window(window)
+            driver.close()
+    if Subscribe_erro_stop_time == 'stop':
+        like()
+    con_sub +=1
+    if con_sub == 5:
+        print('con_sub')
+        like()
 def Subscribe():
     
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
@@ -284,12 +304,9 @@ def Subscribe():
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
             time.sleep(2)
-
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
             time.sleep(3)
             email_to_find = email
-
-            # البحث عن المستخدم باستخدام البريد الإلكتروني
             user_data = collection.find_one({"email": email_to_find})
 
             if user_data:
@@ -306,64 +323,52 @@ def Subscribe():
                 pass
         except NoSuchWindowException:
             print('NoSuchWindowException_stop')
-            break
-    
+            options = uc.ChromeOptions()
+            options.add_argument('--headless')
+            driver = uc.Chrome(options=options)
+
+            driver.implicitly_wait(10)
+                        
+            driver.maximize_window()
+            print('NoSuchWindowException_open')
         except NoSuchElementException:
-            limeit_all_ike4like()
             print('NoSuchElementException_sub')
             driver.save_screenshot('NoSuchElement_sub_{}.png'.format(s))
-            failed_success_minutes()
-            driver.switch_to.window(driver.window_handles[0])
-            driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
-            time.sleep(20)
-            current_url = driver.current_url
-            if current_url=='https://www.like4like.org/login/':
-                print('https://www.like4like.org/login/')
-                like3like_login()
+            Subscribe_erroo()
 
-            all_windows = driver.window_handles
-            if len(all_windows) > 1:
-                for window in all_windows[1:]:
-                    driver.switch_to.window(window)
-                    driver.close()
-            if Subscribe_erro_stop_time == 'stop':
-                like()
-                
-
-            con_sub +=1
-            if con_sub == 5:
-                print('con_sub')
-                like()
                 
         except Exception as s2:
-            limeit_all_ike4like()
-            #print(s2)
-            try:
-                failed_success_minutes()
-                driver.save_screenshot('erro_sub_{}'.format(s))
-                driver.switch_to.window(driver.window_handles[0])
-                driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")  
-                current_url = driver.current_url
-                if current_url=='https://www.like4like.org/login/':
-                    print('https://www.like4like.org/login/')
-                    like3like_login()
-                all_windows = driver.window_handles
-                if len(all_windows) > 1:
-                    for window in all_windows[1:]:
-                        driver.switch_to.window(window)
-                        driver.close()
+            print('Subscribe_erroo:   ',s2)
+            driver.save_screenshot('erro_sub_{}.png'.format(s))
+            Subscribe_erroo()
 
-                
-                if Subscribe_erro_stop_time == 'stop':
-                    like()
-                con_sub +=1
-                if con_sub == 5:
-                    print('con_sub_2')
-                    like()
-            except Exception as s4:
-                print(s4)
-                continue
+def like_erro():
+    limeit_all_ike4like()
+    failed_success_minutes()
+    try:
+        if like_erro_stop_time == 'stop':
+            print('Subscribe__stop_time_NoSuchElementException')
+            Subscribe()
+        con_like+=1
+        if con_like == 5:
+            print('con_like')
+            Subscribe()
+        driver.switch_to.window(driver.window_handles[0])
+        driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
+        current_url = driver.current_url
+        if current_url=='https://www.like4like.org/login/':
+            print('https://www.like4like.org/login/')
+            like3like_login()
 
+        all_windows = driver.window_handles
+        if len(all_windows) > 1:
+            for window in all_windows[1:]:
+                driver.switch_to.window(window)
+                driver.close()
+
+    except Exception as s3:
+        print(s3)
+    
 def like():
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
     con_like = 0
@@ -402,64 +407,22 @@ def like():
                     )
         except NoSuchWindowException:
             print('NoSuchWindowException_stop')
-            break
+            options = uc.ChromeOptions()
+            options.add_argument('--headless')
+            driver = uc.Chrome(options=options)
+
+            driver.implicitly_wait(10)
+                        
+            driver.maximize_window()
+            print('NoSuchWindowException_open')
         except NoSuchElementException:
-            limeit_all_ike4like()
             print('NoSuchElementException_like')
             driver.save_screenshot('NoSuchElement_like_{}.png'.format(s))
-            if Subscribe_erro_stop_time == 'stop':
-                print('Subscribe__stop_time_NoSuchElementException')
-            else:
-                failed_success_minutes()
-                con_like+=1
-                if con_like == 5:
-                    print('con_like')
-                    Subscribe()
-            driver.switch_to.window(driver.window_handles[0])
-            driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
-            time.sleep(20)
-            current_url = driver.current_url
-            if current_url=='https://www.like4like.org/login/':
-                print('https://www.like4like.org/login/')
-                like3like_login()
-
-            all_windows = driver.window_handles
-            if len(all_windows) > 1:
-                for window in all_windows[1:]:
-                    driver.switch_to.window(window)
-                    driver.close()
-
-
-                
-
-
+            like_erro()
         except Exception as s:
-            print(s)
-            limeit_all_ike4like()
-            try:
-                current_url = driver.current_url
-                if current_url=='https://www.like4like.org/login/':
-                    print('https://www.like4like.org/login/')
-                    like3like_login()
+            print('Subscribe_erroo:   ',s)
+            driver.save_screenshot('erro_like_{}.png'.format(s))
+            like_erro()
 
-                all_windows = driver.window_handles
-                if len(all_windows) > 1:
-                    for window in all_windows[1:]:
-                        driver.switch_to.window(window)
-                        driver.close()
-                #errrrroo += 1
-                #print('false'+int(errrrroo))
-                errrrroo='erro_like_{}'.format(s)
-                driver.save_screenshot('{}.png'.format(errrrroo))
-                if Subscribe_erro_stop_time == 'stop':
-                    print('Subscribe__stop_time_NoSuchElementException')
-                else:
-                    failed_success_minutes()
-                    con_like+=1
-                    if con_like == 5:
-                        print('con_like')
-                        Subscribe()
-            except Exception as s3:
-                print(s3)
-                continue
+
 Subscribe()
