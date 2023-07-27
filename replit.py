@@ -206,7 +206,17 @@ for cookies_totel in os.listdir(os.getcwd()):
             {"$set": {"login_youtube": new_login_youtube}}
             )
         cookis_like()
-
+def limeit_all_ike4like():
+    if Subscribe_erro_stop_time == 'stop' and like_erro_stop_time == 'stop':
+        
+        email_to_find = email
+        user_data = collection.find_one({"email": email_to_find})
+        failed_stop_all = 'Sub_like'
+        collection.update_one(
+            {"email": email_to_find},
+            {"$set": {"limit": failed_stop_all}})
+        print('failed_stop_all_like4like')
+        sys.exit()
 def failed_success_minutes():
     global Subscribe_erro_stop_time
     global like_erro_stop_time
@@ -226,24 +236,28 @@ def failed_success_minutes():
             print(failed_success)
             email_to_find = email
             user_data = collection.find_one({"email": email_to_find})
-            collection.update_one(
-            {"email": email_to_find},
-            {"$set": {"limit": failed_success}})            
+           
             current_url = driver.current_url
             if current_url=='https://www.like4like.org/earn-credits.php?feature=youtubes':
                 print('Subscribe_erro_stop_time')
                 Subscribe_erro_stop_time = 'stop'
+                collection.update_one(
+                {"email": email_to_find},
+                {"$set": {"limit_sub": failed_success}}) 
             if current_url=='https://www.like4like.org/earn-credits.php?feature=youtube':
                 print('like_erro_stop_time')
                 like_erro_stop_time = 'stop'
-                email_to_find = email
-                user_data = collection.find_one({"email": email_to_find})
                 collection.update_one(
                 {"email": email_to_find},
-                {"$set": {"erro": like_erro_stop_time}}) 
+                {"$set": {"limit_like": failed_success}})
         if erro_minutes == 'No tasks are currently available, please try again later...':
             print('No tasks are currently available')
         #driver.quit()
+    except NoSuchWindowException:
+        print('NoSuchWindowException_failed_success_minutes)
+    except NoSuchElementException:
+        limeit_all_ike4like()
+        print('NoSuchElementException_failed_success_minutes')
     except Exception as ssssd2:
         
         print('failed_success_minutes:  ',ssssd2)
@@ -295,6 +309,7 @@ def Subscribe():
             break
     
         except NoSuchElementException:
+            limeit_all_ike4like()
             print('NoSuchElementException_sub')
             driver.save_screenshot('NoSuchElement_sub_{}.png'.format(s))
             failed_success_minutes()
@@ -321,6 +336,7 @@ def Subscribe():
                 like()
                 
         except Exception as s2:
+            limeit_all_ike4like()
             #print(s2)
             try:
                 failed_success_minutes()
@@ -388,6 +404,7 @@ def like():
             print('NoSuchWindowException_stop')
             break
         except NoSuchElementException:
+            limeit_all_ike4like()
             print('NoSuchElementException_like')
             driver.save_screenshot('NoSuchElement_like_{}.png'.format(s))
             if Subscribe_erro_stop_time == 'stop':
@@ -418,6 +435,7 @@ def like():
 
         except Exception as s:
             print(s)
+            limeit_all_ike4like()
             try:
                 current_url = driver.current_url
                 if current_url=='https://www.like4like.org/login/':
