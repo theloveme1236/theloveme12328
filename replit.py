@@ -47,6 +47,7 @@ def cookis_like():
     driver.refresh()
 
 def like3like_login():
+    global email
     
     for cookies_totel in os.listdir(os.getcwd()):    
         cookies_totel_1 = cookies_totel.split('_cookies')[0]
@@ -77,10 +78,10 @@ def like3like_login():
                 pickle.dump(driver.get_cookies(), open("like_cookies_{}.pkl".format(email), "wb"))
                 email_to_find = email
                 user_data = collection.find_one({"email": email_to_find})
-                new_login_like = 'true_login'
+                new_login_like_1 = 'true_login'
                 collection.update_one(
                     {"email": email_to_find},
-                    {"$set": {"login_like": new_login_like}}
+                    {"$set": {"login_like": new_login_like_1}}
                 )
                 print('login_usearname_passowrd_true')
                 
@@ -100,10 +101,10 @@ def like3like_login():
                 if current_url=='https://www.like4like.org/user/':
                     email_to_find = email
                     user_data = collection.find_one({"email": email_to_find})
-                    new_login_like = 'login_cookies'
+                    new_login_like_2 = 'login_cookies'
                     collection.update_one(
                         {"email": email_to_find},
-                        {"$set": {"login_like": new_login_like}}
+                        {"$set": {"login_like": new_login_like_2}}
                     )
                     print('first_logon_cookies_true')
                 else:
@@ -145,6 +146,13 @@ for cookies_totel in os.listdir(os.getcwd()):
             time.sleep(5)
             cookies_add = "like_cookies_{}.pkl".format(email)
             pickle.dump(driver.get_cookies(), open("like_cookies_{}.pkl".format(email), "wb"))
+            email_to_find = email
+            user_data = collection.find_one({"email": email_to_find})
+            new_login_like_4 = 'login_fisrt_cookies'
+            collection.update_one(
+                {"email": email_to_find},
+                {"$set": {"login_like": new_login_like_4}}
+            )
 
         else:
             print('else')
@@ -163,10 +171,10 @@ for cookies_totel in os.listdir(os.getcwd()):
                 print('login_cookies')
                 email_to_find = email
                 user_data = collection.find_one({"email": email_to_find})
-                new_login_like = 'login_cookies'
+                new_login_like_6 = 'login_cookies'
                 collection.update_one(
                     {"email": email_to_find},
-                    {"$set": {"login_like": new_login_like}}
+                    {"$set": {"login_like": new_login_like_6}}
                 )
             else:
                 print('false_cookies')
@@ -195,7 +203,7 @@ for cookies_totel in os.listdir(os.getcwd()):
 
         collection.update_one(
             {"email": email_to_find},
-            {"$set": {"login_like": new_login_youtube}}
+            {"$set": {"login_youtube": new_login_youtube}}
             )
         cookis_like()
 
