@@ -254,7 +254,7 @@ def failed_success_minutes():
             print('No tasks are currently available')
         #driver.quit()
     except NoSuchWindowException:
-        print('NoSuchWindowException_failed_success_minutes)
+        print('NoSuchWindowException_failed_success_minutes')
     except NoSuchElementException:
         limeit_all_ike4like()
         print('NoSuchElementException_failed_success_minutes')
