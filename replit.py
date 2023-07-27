@@ -229,16 +229,17 @@ def failed_success_minutes():
         print('failed_success_minutes:  ',ssssd2)
         
 def Subscribe():
-
+    
+    driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
     for s in range(40004000):
         try:
              
-            driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
+            
             driver.maximize_window()
             driver.implicitly_wait(15)
             #driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
 
-            driver.find_element(By.XPATH, '/html/body/div[6]/div/div[1]/div[2]/div[2]/div[4]/div[1]/div[2]/div[1]/div/div[3]/div/div').click()
+            driver.find_element(By.CSS_SELECTOR, "a[class^='cursor earn_pages_button profile_view_img']").click()
             driver.switch_to.window(driver.window_handles[1])
             time.sleep(2)
             driver.find_element(By.ID, 'subscribe-button').click()            
@@ -271,6 +272,7 @@ def Subscribe():
         except NoSuchElementException:
             print('NoSuchElementException_sub')
             time.sleep(20)
+            driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
         except Exception as s2:
             #print(s2)
             try:
@@ -298,15 +300,16 @@ def Subscribe():
                 continue
 
 def like():
+    driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
     for s in range(40004000):
         try:
-            driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
+            
             driver.maximize_window()
             driver.implicitly_wait(15)
             #driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
 
             time.sleep(5)
-            driver.find_element(By.XPATH, '/html/body/div[6]/div/div[1]/div[2]/div[2]/div[4]/div[1]/div[2]/div[1]/div/div[3]/div/div/a').click()
+            driver.find_element(By.CSS_SELECTOR, "a[class^='cursor earn_pages_button profile_view_img']").click()
             driver.switch_to.window(driver.window_handles[1])
             time.sleep(5)
             driver.find_element(By.ID, 'segmented-like-button').click()
@@ -334,6 +337,7 @@ def like():
         except NoSuchElementException:
             print('NoSuchElementException_like')
             time.sleep(20)
+            driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
 
         except Exception as s:
             print(s)
