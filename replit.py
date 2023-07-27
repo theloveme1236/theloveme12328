@@ -182,6 +182,10 @@ for cookies_totel in os.listdir(os.getcwd()):
         print(cookies_totel)
         with open(cookies_totel, 'r') as file:
             cookies = file.readlines()
+        for cookies_totel in os.listdir(os.getcwd()):
+            cookies_totel_1 = cookies_totel.split('_cookies')[0]
+            if cookies_totel_1=='like':                
+                email = cookies_totel.split('like_cookies_')[-1].split('.pkl')[0]
         email_to_find = email
         user_data = collection.find_one({"email": email_to_find})
         new_login_youtube = 'youtube_cookies'
