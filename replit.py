@@ -231,6 +231,7 @@ def failed_success_minutes():
 def Subscribe():
     
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
+    connnnn= 0 
     for s in range(40004000):
         try:
              
@@ -273,6 +274,12 @@ def Subscribe():
             print('NoSuchElementException_sub')
             time.sleep(20)
             driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
+            connnnn +=1
+            if connnnn ==int('5'):
+                print('connnnn_sub')
+                like()
+                
+            
         except Exception as s2:
             #print(s2)
             try:
@@ -300,6 +307,7 @@ def Subscribe():
                 continue
 
 def like():
+    connnnn_2 = 0
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
     for s in range(40004000):
         try:
@@ -338,6 +346,10 @@ def like():
             print('NoSuchElementException_like')
             time.sleep(20)
             driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
+            connnnn_2 +=1
+            if connnnn_2 ==int('5'):
+                print('connnnn_like')
+                Subscribe()
 
         except Exception as s:
             print(s)
