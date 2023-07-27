@@ -50,76 +50,79 @@ def cookis_like():
 def like3like_login():
     global email
     global driver
-    
-    for cookies_totel in os.listdir(os.getcwd()):    
-        cookies_totel_1 = cookies_totel.split('_cookies')[0]
-        if cookies_totel_1=='like':
-            email = cookies_totel.split('like_cookies_')[-1].split('.pkl')[0]
-            print(email)
-            password = '1234thelove'
-            driver.get("https://www.like4like.org/login/")
-            time.sleep(2)
-            driver.find_element(By.ID, 'username').send_keys(email)
-            time.sleep(2)
-            driver.find_element(By.ID, 'password').send_keys(password)
-            time.sleep(2)
-            try:
-                driver.find_element(By.XPATH, '/html/body/div[6]/form/fieldset/table/tbody/tr[8]/td/span').click()
-            except:
-                pass
-            time.sleep(10)
-            driver.get("https://www.like4like.org/user/")
-            time.sleep(10)
-            current_url = driver.current_url
-            if current_url=='https://www.like4like.org/user/':
-                print(current_url)
-                print('login_usearname_passowrd')
-                driver.get("https://www.like4like.org/#social-media-platform-list")
-                time.sleep(5)
-                cookies_add = "like_cookies_{}.pkl".format(email)
-                pickle.dump(driver.get_cookies(), open("like_cookies_{}.pkl".format(email), "wb"))
-                email_to_find = email
-                user_data = collection.find_one({"email": email_to_find})
-                new_login_like_1 = 'true_login'
-                collection.update_one(
-                    {"email": email_to_find},
-                    {"$set": {"login_like": new_login_like_1}}
-                )
-                print('login_usearname_passowrd_true')
-                
-            else:
-                print('first_logon_cookies')
-                driver.get("https://www.like4like.org/#social-media-platform-list")
-                cookies = pickle.load(open('{}'.format(cookies_totel), "rb"))
-                for cookie in cookies:
-                    try:
-                        driver.add_cookie(cookie)
-                    except Exception as ss:
-                        print(ss)
-                        continue
+    current_url = driver.current_url
+    if current_url=='https://www.like4like.org/login/':
+        
+        print('https://www.like4like.org/login/')
+        for cookies_totel in os.listdir(os.getcwd()):    
+            cookies_totel_1 = cookies_totel.split('_cookies')[0]
+            if cookies_totel_1=='like':
+                email = cookies_totel.split('like_cookies_')[-1].split('.pkl')[0]
+                print(email)
+                password = '1234thelove'
+                driver.get("https://www.like4like.org/login/")
+                time.sleep(2)
+                driver.find_element(By.ID, 'username').send_keys(email)
+                time.sleep(2)
+                driver.find_element(By.ID, 'password').send_keys(password)
+                time.sleep(2)
+                try:
+                    driver.find_element(By.XPATH, '/html/body/div[6]/form/fieldset/table/tbody/tr[8]/td/span').click()
+                except:
+                    pass
+                time.sleep(10)
                 driver.get("https://www.like4like.org/user/")
-                time.sleep(15)
+                time.sleep(10)
                 current_url = driver.current_url
                 if current_url=='https://www.like4like.org/user/':
+                    print(current_url)
+                    print('login_usearname_passowrd')
+                    driver.get("https://www.like4like.org/#social-media-platform-list")
+                    time.sleep(5)
+                    cookies_add = "like_cookies_{}.pkl".format(email)
+                    pickle.dump(driver.get_cookies(), open("like_cookies_{}.pkl".format(email), "wb"))
                     email_to_find = email
                     user_data = collection.find_one({"email": email_to_find})
-                    new_login_like_2 = 'login_cookies'
+                    new_login_like_1 = 'true_login'
                     collection.update_one(
                         {"email": email_to_find},
-                        {"$set": {"login_like": new_login_like_2}}
+                        {"$set": {"login_like": new_login_like_1}}
                     )
-                    print('first_logon_cookies_true')
+                    print('login_usearname_passowrd_true')
+                    
                 else:
-                    print('first_logon_cookies_flase')
-                    email_to_find = email
-                    user_data = collection.find_one({"email": email_to_find})
-                    new_login_like = 'false'
+                    print('first_logon_cookies')
+                    driver.get("https://www.like4like.org/#social-media-platform-list")
+                    cookies = pickle.load(open('{}'.format(cookies_totel), "rb"))
+                    for cookie in cookies:
+                        try:
+                            driver.add_cookie(cookie)
+                        except Exception as ss:
+                            print(ss)
+                            continue
+                    driver.get("https://www.like4like.org/user/")
+                    time.sleep(15)
+                    current_url = driver.current_url
+                    if current_url=='https://www.like4like.org/user/':
+                        email_to_find = email
+                        user_data = collection.find_one({"email": email_to_find})
+                        new_login_like_2 = 'login_cookies'
+                        collection.update_one(
+                            {"email": email_to_find},
+                            {"$set": {"login_like": new_login_like_2}}
+                        )
+                        print('first_logon_cookies_true')
+                    else:
+                        print('first_logon_cookies_flase')
+                        email_to_find = email
+                        user_data = collection.find_one({"email": email_to_find})
+                        new_login_like = 'false'
 
-                    collection.update_one(
-                        {"email": email_to_find},
-                        {"$set": {"login_like": new_login_like}}
-                    )
-                    driver.quit()
+                        collection.update_one(
+                            {"email": email_to_find},
+                            {"$set": {"login_like": new_login_like}}
+                        )
+                        driver.quit()
                 
 for cookies_totel in os.listdir(os.getcwd()):
     cookies_totel_1 = cookies_totel.split('_cookies')[0]
@@ -220,6 +223,28 @@ def limeit_all_ike4like():
             {"$set": {"limit": failed_stop_all}})
         print('failed_stop_all_like4like')
         sys.exit()
+def check_driver_open():
+    try:
+        all_windows = driver.window_handles
+        if len(all_windows) > 1:
+            for window in all_windows[1:]:
+                driver.switch_to.window(window)
+                driver.close()
+            driver.switch_to.window(driver.window_handles[0])
+    except Exception as ddfrs:
+        print('check_driver_open: ' , ddfrs)
+def no_Window_driver():
+    global driver
+    print('NoSuchWindowException_stop')
+    options = uc.ChromeOptions()
+    options.add_argument('--headless')
+    driver = uc.Chrome(options=options)
+    driver.implicitly_wait(10)
+    driver.maximize_window()
+    driver.get("https://www.like4like.org/#social-media-platform-list")
+    time.sleep(10)
+    like3like_login()
+    print('NoSuchWindowException_open')    
 def failed_success_minutes():
     global Subscribe_erro_stop_time
     global like_erro_stop_time
@@ -258,12 +283,16 @@ def failed_success_minutes():
             print('No tasks are currently available')
         #driver.quit()
     except NoSuchWindowException:
-        print('NoSuchWindowException_failed_success_minutes')
+        print('failed_success_minutes')
+        no_Window_driver()
+        like3like_login()
+
     except NoSuchElementException:
         limeit_all_ike4like()
+        like3like_login()
         print('NoSuchElementException_failed_success_minutes')
     except Exception as ssssd2:
-        
+        like3like_login()
         print('failed_success_minutes:  ',ssssd2)
 def Subscribe_erroo():
     global driver
@@ -272,16 +301,9 @@ def Subscribe_erroo():
     limeit_all_ike4like()
     driver.switch_to.window(driver.window_handles[0])
     driver.get("https://www.like4like.org/earn-credits.php?feature=youtubes")
-    current_url = driver.current_url
-    if current_url=='https://www.like4like.org/login/':
-        print('https://www.like4like.org/login/')
-        like3like_login()
-
-    all_windows = driver.window_handles
-    if len(all_windows) > 1:
-        for window in all_windows[1:]:
-            driver.switch_to.window(window)
-            driver.close()
+    time.sleep(10)
+    like3like_login()
+    check_driver_open()
     if Subscribe_erro_stop_time == 'stop':
         like()
     con_sub +=1
@@ -295,19 +317,15 @@ def Subscribe():
     con_sub = 0
     for s in range(40004000):
         try:
-             
-            
             driver.maximize_window()
             driver.implicitly_wait(15)
             #driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
-
             driver.find_element(By.CSS_SELECTOR, "a[class^='cursor earn_pages_button profile_view_img']").click()
             driver.switch_to.window(driver.window_handles[1])
             time.sleep(2)
             driver.find_element(By.ID, 'subscribe-button').click()            
             #driver.save_screenshot('{}.png'.format(s))
             time.sleep(2)
-
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
             time.sleep(2)
@@ -315,7 +333,6 @@ def Subscribe():
             time.sleep(3)
             email_to_find = email
             user_data = collection.find_one({"email": email_to_find})
-
             if user_data:
                 current_sub_value = int(user_data.get("sub", 0))
                 new_sub_value = current_sub_value + 1
@@ -329,15 +346,10 @@ def Subscribe():
                 
                 pass
         except NoSuchWindowException:
-            print('NoSuchWindowException_stop')
-            options = uc.ChromeOptions()
-            options.add_argument('--headless')
-            driver = uc.Chrome(options=options)
-
-            driver.implicitly_wait(10)
-                        
-            driver.maximize_window()
-            print('NoSuchWindowException_open')
+            print('sub: NoSuchWindowException_stop')
+            no_Window_driver()
+            like3like_login()
+            print('sub: NoSuchWindowException_open')
         except NoSuchElementException:
             print('NoSuchElementException_sub')
             driver.save_screenshot('NoSuchElement_sub_{}.png'.format(s))
@@ -364,16 +376,10 @@ def like_erro():
             Subscribe()
         driver.switch_to.window(driver.window_handles[0])
         driver.get("https://www.like4like.org/earn-credits.php?feature=youtube")
-        current_url = driver.current_url
-        if current_url=='https://www.like4like.org/login/':
-            print('https://www.like4like.org/login/')
-            like3like_login()
+        time.sleep(10)
+        like3like_login()
+        check_driver_open()
 
-        all_windows = driver.window_handles
-        if len(all_windows) > 1:
-            for window in all_windows[1:]:
-                driver.switch_to.window(window)
-                driver.close()
 
     except Exception as s3:
         print(s3)
@@ -417,15 +423,9 @@ def like():
                     {"$set": {"like": new_sub_value}}
                     )
         except NoSuchWindowException:
-            print('NoSuchWindowException_stop')
-            options = uc.ChromeOptions()
-            options.add_argument('--headless')
-            driver = uc.Chrome(options=options)
-
-            driver.implicitly_wait(10)
-                        
-            driver.maximize_window()
-            print('NoSuchWindowException_open')
+            print('like: NoSuchWindowException_stop')
+            no_Window_driver()
+            print('like: NoSuchWindowException_open')
         except NoSuchElementException:
             print('NoSuchElementException_like')
             driver.save_screenshot('NoSuchElement_like_{}.png'.format(s))
