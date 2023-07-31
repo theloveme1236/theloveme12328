@@ -28,6 +28,7 @@ db = cluster["my_database"]
 collection = db["users"]        
 options = uc.ChromeOptions()
 options.add_argument('--headless')
+options.add_argument('--lang=en')
 driver = uc.Chrome(options=options)
 
 driver.implicitly_wait(10)
@@ -238,6 +239,7 @@ def no_Window_driver():
     print('NoSuchWindowException_stop')
     options = uc.ChromeOptions()
     options.add_argument('--headless')
+    options.add_argument('--lang=en')
     driver = uc.Chrome(options=options)
     driver.implicitly_wait(10)
     driver.maximize_window()
