@@ -29,7 +29,8 @@ collection = db["users"]
 options = uc.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--lang=en')
-driver = uc.Chrome(options=options)
+driver = uc.Chrome(use_subprocess=True, options=options) 
+#driver = uc.Chrome(options=options)
 
 driver.implicitly_wait(10)
             
@@ -322,18 +323,20 @@ def Subscribe():
             driver.maximize_window()
             driver.implicitly_wait(15)
             #driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
+            time.sleep(5)
             driver.find_element(By.CSS_SELECTOR, "a[class^='cursor earn_pages_button profile_view_img']").click()
             driver.switch_to.window(driver.window_handles[1])
-            time.sleep(2)
+            time.sleep(5)
             driver.find_element(By.ID, 'subscribe-button').click()            
             
-            time.sleep(2)
+            
             driver.save_screenshot('sub_{}.png'.format(s))
+            time.sleep(5)
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
-            time.sleep(2)
+            time.sleep(5)
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
-            time.sleep(3)
+            time.sleep(5)
             email_to_find = email
             user_data = collection.find_one({"email": email_to_find})
             if user_data:
