@@ -4,16 +4,17 @@ os.system('! sudo wget https://dl.google.com/linux/direct/google-chrome-stable_c
 os.system('! sudo apt install ./google-chrome-stable_current_amd64.deb')
 os.system('! sudo pip install selenium')
 os.system('! sudo pip install pymongo')
-os.system('! sudo pip install undetected_chromedriver')
+os.system('! sudo pip install webdriver-manager')
 
 import subprocess
 import time
-from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import Chrome, ChromeOptions
-import undetected_chromedriver as uc
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from pymongo import MongoClient
 import requests
 import pickle
@@ -26,10 +27,12 @@ import sys
 cluster = MongoClient('mongodb+srv://theloveme1238:zx5LtPcgLpcpIh7D@cluster0.pzuhxov.mongodb.net/?retryWrites=true&w=majority')
 db = cluster["my_database"]
 collection = db["users"]        
-options = uc.ChromeOptions()
+options = webdriver.ChromeOptions()
 options.add_argument('--headless')
+options.add_argument("--no-sandbox")
+options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--lang=en')
-driver = uc.Chrome(use_subprocess=True, options=options) 
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),options=options)
 #driver = uc.Chrome(options=options)
 
 driver.implicitly_wait(10)
