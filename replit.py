@@ -406,18 +406,17 @@ def like():
             
             driver.maximize_window()
             driver.implicitly_wait(15)
+            time.sleep(random.randrange(10, 30))
             #driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1);")
-
-            time.sleep(random.randrange(3, 7))
             driver.find_element(By.CSS_SELECTOR, "a[class^='cursor earn_pages_button profile_view_img']").click()
             driver.switch_to.window(driver.window_handles[1])
-            time.sleep(random.randrange(3, 7))
+            time.sleep(random.randrange(5, 10))
             driver.find_element(By.ID, 'segmented-like-button').click()
-            time.sleep(random.randrange(3, 7))
+            time.sleep(random.randrange(5, 10))
             driver.save_screenshot('like_{}.png'.format(s))
             driver.close()
             driver.switch_to.window(driver.window_handles[0])
-            time.sleep(random.randrange(3, 7))
+            time.sleep(random.randrange(5, 10))
             driver.find_element(By.CSS_SELECTOR, '[alt="Click On The Button To Confirm Interaction!"]').click()
             email_to_find = email
             user_data = collection.find_one({"email": email_to_find})
